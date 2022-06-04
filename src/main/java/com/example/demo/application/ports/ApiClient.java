@@ -5,6 +5,6 @@ import com.example.demo.shared.models.Holidays;
 import java.io.IOException;
 import java.util.List;
 
-public interface  ApliClient <T extends Holidays, R extends Holidays>{
+public interface ApiClient<T extends Holidays>{
     List<T> get() throws IOException;
 }

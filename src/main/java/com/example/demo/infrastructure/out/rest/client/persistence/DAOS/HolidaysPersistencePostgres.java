@@ -1,9 +1,9 @@
 package com.example.demo.infrastructure.out.rest.client.persistence.DAOS;
 
+import com.example.demo.application.ports.ApiClient;
 import com.example.demo.application.ports.HolidaysPersistence;
 import com.example.demo.infrastructure.out.rest.client.persistence.entities.HolidaysEntity;
 import com.example.demo.infrastructure.out.rest.client.persistence.repository.HolidaysRepository;
-import com.example.demo.infrastructure.out.rest.client.retrofit.HolidaysApiClient;
 import com.example.demo.shared.models.Holidays;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,9 @@ import java.util.stream.Collectors;
 @Component
 public class HolidaysPersistencePostgres implements HolidaysPersistence {
 
-    @Autowired
-    HolidaysRepository holidaysRepository;
+    ApiClient<Holidays> apiClient;
 
-    @Autowired
-    HolidaysApiClient holidaysApiClient;
+    HolidaysRepository holidaysRepository;
 
     @Override
     public List<Holidays> findAll() throws IOException {
@@ -30,10 +28,12 @@ public class HolidaysPersistencePostgres implements HolidaysPersistence {
         if (this.holidaysRepository.findAll() != null)
         {
             holidaysList = this.holidaysRepository.saveAll(
-                    this.holidaysApiClient.getHolidays().stream().map(
-                            holidays -> holidays.toEntity()
-                    ).collect(Collectors.toList())
+                    this.apiClient.get()
+                            .stream()
+                            .map(holidays -> holidays.toEntity())
+                            .collect(Collectors.toList())
             );
+
             return holidaysList.stream().map(holidaysEntity -> holidaysEntity.toModel()).collect(Collectors.toList());
         }
         return null;

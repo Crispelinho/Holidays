@@ -1,6 +1,6 @@
 package com.example.demo.application.usecase;
 
-import com.example.demo.application.ports.ApliClient;
+import com.example.demo.application.ports.ApiClient;
 import com.example.demo.shared.models.Holidays;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,9 +12,9 @@ import java.util.List;
 @Component
 public class HolidaysUseCase {
 
-    private final ApliClient apliClient;
+    private final ApiClient apiClient;
 
     public List<Holidays> saveFeriados() throws IOException {
-        return apliClient.get();
+        return apiClient.get();
     }
 }

@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/holidays")
-@Validated
 @AllArgsConstructor
 public class HolidaysController {
 
