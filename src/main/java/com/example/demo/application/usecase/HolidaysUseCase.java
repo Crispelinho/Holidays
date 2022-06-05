@@ -14,7 +14,7 @@ public class HolidaysUseCase {
 
     private final ApiClient apiClient;
 
-    public List<Holidays> saveFeriados() throws IOException {
+    public List<Holidays> saveHolidays() throws IOException {
         return apiClient.get();
     }
 }

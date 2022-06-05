@@ -28,6 +28,6 @@ public class HolidaysEntity {
     private String extra;
 
     public Holidays toModel(){
-        return Holidays.builder().id(id).date(date).title(title).extra(extra).build();
+        return Holidays.builder().date(date).title(title).extra(extra).build();
     }
 }

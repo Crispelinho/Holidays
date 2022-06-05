@@ -18,9 +18,11 @@ public class HolidaysApiClientImp implements HolidaysApiClient{
     public List<Holidays> getHolidays() throws IOException {
 
         Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance(HolidaysConstants.BASE_URL);
-        RequestRetrofitDAO requestPayURetrofitDAO = retrofit.create(RequestRetrofitDAO.class);
-        Call<List<Holidays>> requestCall =  requestPayURetrofitDAO.getHolidays();
+        RequestRetrofitDAO requestRetrofitDAO = retrofit.create(RequestRetrofitDAO.class);
+        Call<List<Holidays>> requestCall =  requestRetrofitDAO.getHolidays();
         Response<List<Holidays>> execute = requestCall.execute();
+        System.out.println(execute);
+        System.out.println(execute.body());
         return execute.body();
     }
 
