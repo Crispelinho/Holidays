@@ -21,8 +21,6 @@ public class HolidaysApiClientImp implements HolidaysApiClient{
         RequestRetrofitDAO requestRetrofitDAO = retrofit.create(RequestRetrofitDAO.class);
         Call<List<Holidays>> requestCall =  requestRetrofitDAO.getHolidays();
         Response<List<Holidays>> execute = requestCall.execute();
-        System.out.println(execute);
-        System.out.println(execute.body());
         return execute.body();
     }
 

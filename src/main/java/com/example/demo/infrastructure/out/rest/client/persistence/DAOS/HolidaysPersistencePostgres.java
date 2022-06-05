@@ -24,17 +24,17 @@ public class HolidaysPersistencePostgres implements HolidaysPersistence {
 
     @Override
     public List<Holidays> findAll() throws IOException {
-        List<HolidaysEntity> holidaysList;
+        List<HolidaysEntity> holidaysEntityList;
+        List<Holidays> holidaysList;
         if (this.holidaysRepository.findAll() != null)
         {
-            holidaysList = this.holidaysRepository.saveAll(
-                    this.apiClient.get()
-                            .stream()
-                            .map(holidays -> holidays.toEntity())
-                            .collect(Collectors.toList())
+            holidaysEntityList = this.holidaysRepository.saveAll(
+                    this.apiClient.get().stream()
+                    .map(holidays -> holidays.toEntity())
+                    .collect(Collectors.toList())
             );
-
-            return holidaysList.stream().map(holidaysEntity -> holidaysEntity.toModel()).collect(Collectors.toList());
+            System.out.println(holidaysEntityList);
+            return holidaysEntityList.stream().map(holidaysEntity -> holidaysEntity.toModel()).collect(Collectors.toList());
         }
         return null;
     }
